@@ -1,5 +1,6 @@
 import Appointment from '../models/Appointments';
 import { isEqual } from 'date-fns';
+import { isDate } from 'date-fns/esm';
 
 class AppointmentsRepository {
   private appointments: Appointment[];
@@ -22,7 +23,7 @@ class AppointmentsRepository {
   }
 
   public create(provider: string, date: Date): Appointment {
-    const appointment = new Appointment(provider, date);
+    const appointment = new Appointment({provider, date});
 
     this.appointments.push(appointment);
 
