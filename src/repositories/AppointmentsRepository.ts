@@ -1,6 +1,6 @@
 import Appointment from '../models/Appointments';
 import { isEqual } from 'date-fns';
-import { isDate } from 'date-fns/esm';
+//import { isDate } from 'date-fns/esm';
 
 class AppointmentsRepository {
   private appointments: Appointment[];
