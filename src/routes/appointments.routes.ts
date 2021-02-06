@@ -12,8 +12,7 @@ appointmentsRouter.use(ensureAuthenticated);
 //Rota: Receber a requisição, chamar outro arquivo, devolver uma resposta
 
 appointmentsRouter.get('/', async (request, response) => {
-
-  console.log(request.user)
+  console.log(request.user);
 
   const appointmentsRepository = getCustomRepository(AppointmentsRepository);
   const appointments = await appointmentsRepository.find();
@@ -22,22 +21,18 @@ appointmentsRouter.get('/', async (request, response) => {
 });
 
 appointmentsRouter.post('/', async (request, response) => {
-  try {
-    const { provider_id, date } = request.body;
+  const { provider_id, date } = request.body;
 
-    const parseDate = parseISO(date);
+  const parseDate = parseISO(date);
 
-    const createAppointment = new CreateAppointmentService();
+  const createAppointment = new CreateAppointmentService();
 
-    const appointment = await createAppointment.execute({
-      date: parseDate,
-      provider_id,
-    });
+  const appointment = await createAppointment.execute({
+    date: parseDate,
+    provider_id,
+  });
 
-    return response.json(appointment);
-  } catch (err) {
-    return response.status(400).json({ error: err.message });
-  }
+  return response.json(appointment);
 });
 
 export default appointmentsRouter;
